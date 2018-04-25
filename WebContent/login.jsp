@@ -11,11 +11,11 @@
 		<table>
 			<tr>
 				<td>Usuario</td>
-				<td><input type="text" name="userName" /></td>
+				<td><input type="text" name="userName" required/></td>
 			</tr>
 			<tr>
 				<td>Password</td>
-				<td><input type="password" name="userPwd" /></td>
+				<td><input type="password" name="userPwd" required/></td>
 			</tr>
 			<tr>
 				<td></td>

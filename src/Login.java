@@ -1,6 +1,9 @@
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,13 +14,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class login
  */
 @WebServlet("/login")
-public class login extends HttpServlet {
+public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public login() {
+    public Login() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,14 +41,28 @@ public class login extends HttpServlet {
 		String userName = request.getParameter("userName");
 		String userPwd = request.getParameter("userPwd");
 		
-		if(userName.equals("chalo") && userPwd.equals("123")){
-			response.sendRedirect("home.jsp");
-		}else{
-			response.sendRedirect("loginError.jsp");
+		List<User> usuarios = new ArrayList();
+		boolean encontrado = false;
+		
+		for(int i=1; i<=9;i++) {
+			User usuario = new User();
+			usuario.setUserName(Integer.toString(i));
+			usuario.setUserPwd(Integer.toString(i));
+			usuarios.add(usuario);
 		}
 		
-		
-		
+		for(int i=0; i<usuarios.size(); i++) {
+			User usuario1 = usuarios.get(i);
+			
+			if(userName.equals(usuario1.getUserName()) && userPwd.equals(usuario1.getUserPwd())) {
+				encontrado = true;
+				response.sendRedirect("home.jsp");
+			}
+		}
+
+		if(!encontrado) {
+			response.sendRedirect("loginError.jsp");
+		}
 	}
 
 }
